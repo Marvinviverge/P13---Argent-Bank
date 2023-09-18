@@ -59,8 +59,10 @@ module.exports.loginUser = async serviceData => {
     }
 
     const token = jwt.sign(
-      { id: user._id },
-      process.env.SECRET_KEY || 'default-secret-key',
+      {
+        id: user._id,
+      },
+      process.env.SECRET_KEY,
       { expiresIn: '1d' }
     )
 

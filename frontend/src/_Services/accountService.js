@@ -18,6 +18,17 @@ let getAllUsers = () => {
 let loginUser = (data) => {
     return Axios.post('/api/v1/user/login', data)
 }
+let getProfile = async (profileData, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }
+    return await Axios
+        .post('/api/v1/user/profile', profileData, config)
+        .then((res) => { return res.data.body })
+        .catch((error) => { return error })
+}
 
 // fonction deconnexion
 let logout = () => {
@@ -43,6 +54,7 @@ let isLogged = () => {
 // export des fonction pour les reutiliser dans les pages
 export const accountService = {
     loginUser,
+    getProfile,
     logout,
     saveToken,
     getToken,

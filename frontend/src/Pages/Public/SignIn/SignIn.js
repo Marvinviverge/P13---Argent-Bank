@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useDispatch } from 'react-redux';
 import { accountService } from "@/_Services/accountService"
 
 import './SignIn.css'
@@ -9,6 +10,7 @@ import './SignIn.css'
 const SignIn = () => {
     const [msg, setMsg] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const initialValues = {
         email: "",
@@ -24,12 +26,13 @@ const SignIn = () => {
     });
 
     const onSubmit = async (data) => {
-        console.log(data)
 
         try {
             accountService.loginUser(data)
                 .then(response => {
-                    accountService.saveToken(response.data.token)
+                    const token = response.data.body.token
+                    accountService.saveToken(token)
+                    dispatch({ type: "Auth/setToken", payload: token });
                     navigate("/user", { replace: true });
                 })
                 .catch(error => {
