@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Background from '../../Assets/img/bank-tree.jpeg';
+import Background from '@/Assets/img/bank-tree.jpeg';
 import './Hero.css';
 
 const Hero = () => {

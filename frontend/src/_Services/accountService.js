@@ -30,6 +30,19 @@ let getProfile = async (profileData, token) => {
         .catch((error) => { return error })
 }
 
+let updateProfile = async (profileData, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }
+    return await Axios
+        .put('/api/v1/user/profile', profileData, config)
+        .then((res) => { return res.data.body })
+        .catch((error) => { return error })
+
+}
+
 // fonction deconnexion
 let logout = () => {
     localStorage.removeItem('token')
@@ -55,6 +68,7 @@ let isLogged = () => {
 export const accountService = {
     loginUser,
     getProfile,
+    updateProfile,
     logout,
     saveToken,
     getToken,

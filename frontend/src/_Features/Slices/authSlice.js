@@ -16,7 +16,6 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
-            accountService.logout()
             state.isError = null
             state.isNetworkError = false
             state.isSuccess = false

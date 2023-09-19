@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import './Header.css'
 import Logo from '@/Assets/img/argentBankLogo.png';
-import { userSelector } from '@/Pages/Public/User/userSelector.js';
+import { userSelector } from '@/_Features/Selectors/userSelector.js';
 
 const Header = () => {
 
@@ -14,8 +14,10 @@ const Header = () => {
     const navigate = useNavigate()
 
     let logout = () => {
-        dispatch({ type: "Auth/logout", payload: navigate('/home') })
+        accountService.logout()
+        dispatch({ type: "Auth/logout" })
         dispatch({ type: "User/setUserProfile", payload: { firstName: '', lastName: '' } })
+        navigate('/home')
     }
 
     return (
