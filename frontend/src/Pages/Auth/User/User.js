@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { datasBank } from '@/Assets/data/datasBank';
 import { loginSelector } from '@/_Features/Selectors/loginSelector';
 import { userSelector } from '@/_Features/Selectors/userSelector';
@@ -13,6 +14,7 @@ const User = () => {
     const { token } = useSelector(loginSelector);
     const { firstName, lastName } = useSelector(userSelector);
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const setinfos = async () => {
         const decodedToken = await accountService.getProfile(token);
@@ -30,9 +32,13 @@ const User = () => {
     const [newLastName, setNewLastName] = useState(lastName)
 
     useEffect(() => {
-        setinfos()
-        setNewFirstName(firstName)
-        setNewLastName(lastName)
+        if (accountService.isLogged()) {
+            setinfos()
+            setNewFirstName(firstName)
+            setNewLastName(lastName)
+        } else {
+            navigate('/home')
+        }
         // eslint-disable-next-line
     }, [firstName, lastName])
 
@@ -48,19 +54,18 @@ const User = () => {
     }
 
     return (
-
         <div className="main bg-dark">
             <div className="header">
                 {
                     !edit &&
-                    <>
+                    <div className='padding'>
                         <h1>Welcome back<br />{firstName} {lastName}!</h1>
                         <button className="edit-button" onClick={() => setEdit(true)}>Edit Name</button>
-                    </>
+                    </div>
                 }
                 {
                     edit &&
-                    <>
+                    <div className='padding'>
                         <h1>Welcome back</h1>
                         <section className='update'>
                             <div className='input-update'>
@@ -72,7 +77,7 @@ const User = () => {
                                 <button className="edit-button" onClick={reset}>Cancel</button>
                             </div>
                         </section>
-                    </>
+                    </div>
                 }
 
             </div>
@@ -87,6 +92,7 @@ const User = () => {
                     />
                 ))
             }
+
         </div>
 
     );

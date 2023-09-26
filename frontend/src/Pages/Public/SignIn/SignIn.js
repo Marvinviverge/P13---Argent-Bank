@@ -8,6 +8,7 @@ import { accountService } from "@/_Services/accountService"
 import './SignIn.css'
 
 const SignIn = () => {
+    // eslint-disable-next-line
     const [msg, setMsg] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -50,29 +51,31 @@ const SignIn = () => {
 
     return (
         <div className="main bg-dark">
-            <section className="sign-in-content">
-                <i className="fa fa-user-circle sign-in-icon"></i>
-                <h1>Sign In</h1>
-                <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-                    <Form>
-                        <div className="input-wrapper">
-                            <label htmlFor="email">Username</label>
-                            <Field name="email" type="text" placeholder="Username" autoComplete="off"></Field>
-                            <ErrorMessage name="email" component="p" className='errorMessage' />
-                        </div>
-                        <div className="input-wrapper">
-                            <label htmlFor="password">Password</label>
-                            <Field name="password" type="password" placeholder="******" autoComplete="off"></Field>
-                            <ErrorMessage name="password" component="p" className='errorMessage' />
-                        </div>
-                        <div className="input-remember">
-                            <input type="checkbox" id="remember-me" /><label htmlFor="remember-me">Remember me</label>
-                        </div>
+            <div className='padding'>
+                <section className="sign-in-content">
+                    <i className="fa fa-user-circle sign-in-icon"></i>
+                    <h1>Sign In</h1>
+                    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+                        <Form>
+                            <div className="input-wrapper">
+                                <label htmlFor="email">Username</label>
+                                <Field name="email" type="text" placeholder="Username" autoComplete="off"></Field>
+                                <ErrorMessage name="email" component="p" className='errorMessage' />
+                            </div>
+                            <div className="input-wrapper">
+                                <label htmlFor="password">Password</label>
+                                <Field name="password" type="password" placeholder="******" autoComplete="off"></Field>
+                                <ErrorMessage name="password" component="p" className='errorMessage' />
+                            </div>
+                            <div className="input-remember">
+                                <input type="checkbox" id="remember-me" /><label htmlFor="remember-me">Remember me</label>
+                            </div>
 
-                        <button className="sign-in-button" type='submit'>Sign In</button>
-                    </Form>
-                </Formik>
-            </section>
+                            <button className="sign-in-button" type='submit'>Sign In</button>
+                        </Form>
+                    </Formik>
+                </section>
+            </div>
         </div>
     );
 };

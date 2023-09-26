@@ -1,18 +1,5 @@
 /** Import des modules nécessaires */
 import Axios from './callerService.js'
-import jwt_Decode from "jwt-decode";
-
-// appel service de l'api
-// fonction decodage token
-let tokenDecode = (token) => {
-    let decode = jwt_Decode(token);
-    return decode
-}
-
-// fonction recuperation de tout les users
-let getAllUsers = () => {
-    return Axios.get('/api/auth/')
-}
 
 // fonction login
 let loginUser = (data) => {
@@ -72,8 +59,6 @@ export const accountService = {
     logout,
     saveToken,
     getToken,
-    isLogged,
-    tokenDecode,
-    getAllUsers
+    isLogged
 }
 

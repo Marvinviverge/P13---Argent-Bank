@@ -8,7 +8,6 @@ const initialState = {
     isSuccess: false,
     isLoading: false,
     token: accountService.getToken(),
-    rememberMe: false,
 }
 
 export const authSlice = createSlice({
@@ -21,11 +20,6 @@ export const authSlice = createSlice({
             state.isSuccess = false
             state.isLoading = false
             state.token = null
-            state.rememberMe = false
-        },
-
-        isRememberMe: (state, action) => {
-            state.rememberMe = action.payload
         },
 
         setToken: (state, action) => {

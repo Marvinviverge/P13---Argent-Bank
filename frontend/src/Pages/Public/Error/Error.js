@@ -4,8 +4,10 @@ import './Error.css'
 
 const Error = () => {
     return (
-        <div>
-
+        <div className='404'>
+            <p>
+                Oups, vous avez rencontré une erreur 404 !
+            </p>
         </div>
     );
 };
